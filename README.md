@@ -12,7 +12,7 @@ conditional branch.
 
 Variant 2 is very similar, but instead relies on mistraining the CPUs branch
 **target** predictor. For more details,
-[here](https://antoncao.me/blog/spectre_v2) is a shameless plug to a blog post 
+[here](https://antoncao.me/blog/spectre) is a shameless plug to a blog post 
 I wrote on the topic.
 
 ## How to Run
